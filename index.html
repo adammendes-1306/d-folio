@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Name | Portfolio</title>
+<meta name="description" content="Portfolio of Your Name, Your Profession.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1F4; --surface:#FFFFFF; --ink:#14213D; --muted:#5B6578;
+  --accent:#2B59FF; --accent-ink:#FFFFFF; --line:#D5DBE5; --sun:#FFC857;
+  --head:'Bricolage Grotesque',system-ui,sans-serif;
+  --body:'Inter Tight',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:var(--body);background:var(--bg);color:var(--ink);line-height:1.6;font-size:17px}
+h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+section{padding:96px 0}
+h2{font-size:clamp(2rem,4vw,2.8rem);font-weight:800;margin-bottom:40px}
+
+/* Nav */
+nav{position:sticky;top:0;z-index:10;background:rgba(238,241,244,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+.logo{font-family:var(--head);font-weight:800;font-size:1.15rem;text-decoration:none}
+nav ul{display:flex;gap:26px;list-style:none}
+nav ul a{text-decoration:none;font-size:.95rem;color:var(--muted);font-weight:500}
+nav ul a:hover{color:var(--ink)}
+.menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:8px;padding:6px 12px;font:inherit;cursor:pointer;color:var(--ink)}
+
+/* Home */
+#home{padding:72px 0 96px}
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(2.8rem,7vw,5.2rem);font-weight:800}
+.hero .role{font-family:var(--head);font-weight:500;font-size:1.3rem;color:var(--accent);margin:18px 0 14px}
+.hero p.desc{color:var(--muted);max-width:46ch;margin-bottom:32px}
+.btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;padding:14px 26px;border-radius:999px;font-weight:500;text-decoration:none;border:2px solid var(--ink);transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.photo{position:relative;justify-self:center;width:min(100%,360px);aspect-ratio:4/5}
+.photo::before{content:"";position:absolute;inset:18px -18px -18px 18px;background:var(--sun);border-radius:180px 180px 24px 24px}
+.photo .frame{position:relative;width:100%;height:100%;border-radius:180px 180px 24px 24px;overflow:hidden;background:var(--ink);display:grid;place-items:center;color:#fff;font-family:var(--head);font-size:4rem;font-weight:800}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* About */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.about p{color:var(--muted);margin-bottom:18px;max-width:60ch}
+.facts{list-style:none;background:var(--surface);border-radius:20px;padding:12px 28px;align-self:start}
+.facts li{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.facts li:last-child{border:0}
+.facts span{color:var(--muted)}
+.facts b{font-weight:500;text-align:right}
+
+/* Projects */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:24px}
+.card{background:var(--surface);border-radius:20px;overflow:hidden;display:flex;flex-direction:column}
+.thumb{height:170px;display:grid;place-items:center;font-family:var(--head);font-weight:800;font-size:2.2rem;color:#fff}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.card:nth-child(1) .thumb{background:var(--accent)}
+.card:nth-child(2) .thumb{background:var(--ink)}
+.card:nth-child(3) .thumb{background:#E4572E}
+.card .body{padding:24px;display:flex;flex-direction:column;gap:12px;flex:1}
+.card h3{font-size:1.35rem}
+.card p{color:var(--muted);font-size:.97rem}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+.tags span{background:var(--bg);border-radius:999px;padding:3px 12px;font-size:.85rem}
+.links{display:flex;gap:18px;font-weight:500;font-size:.95rem}
+
+/* Timeline */
+.timeline{position:relative;list-style:none;padding-left:34px}
+.timeline::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.timeline li{position:relative;padding-bottom:40px}
+.timeline li:last-child{padding-bottom:0}
+.timeline li::before{content:"";position:absolute;left:-34px;top:7px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:4px solid var(--accent)}
+.timeline time{font-weight:500;color:var(--accent);font-size:.95rem}
+.timeline h3{font-size:1.3rem;margin:4px 0 2px}
+.timeline .org{color:var(--muted);margin-bottom:6px}
+.timeline p{max-width:62ch}
+
+/* Skills */
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:24px}
+.group{background:var(--surface);border-radius:20px;padding:28px}
+.group h3{font-size:1.2rem;margin-bottom:20px}
+.skill{margin-bottom:16px}
+.skill:last-child{margin-bottom:0}
+.skill div{display:flex;justify-content:space-between;font-size:.95rem;margin-bottom:6px}
+.bar{height:8px;background:var(--bg);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:99px}
+
+/* Contact */
+#contact{background:var(--ink);color:#fff}
+#contact h2{color:#fff}
+.contact{display:grid;grid-template-columns:1fr 1.1fr;gap:56px}
+.contact p{color:#B8C2D6;max-width:40ch;margin-bottom:24px}
+.contact ul{list-style:none;display:grid;gap:10px}
+.contact ul a{color:var(--sun);text-decoration:none;font-weight:500}
+.contact ul a:hover{text-decoration:underline}
+form{display:grid;gap:16px}
+label{display:grid;gap:6px;font-size:.95rem;color:#B8C2D6}
+input,textarea{font:inherit;padding:13px 16px;border-radius:12px;border:1px solid #3A4A6E;background:#1C2C4F;color:#fff}
+textarea{min-height:130px;resize:vertical}
+form .btn{border-color:var(--sun);background:var(--sun);color:var(--ink);cursor:pointer;font:inherit;font-weight:500;justify-self:start}
+#status{font-size:.95rem;min-height:1.4em;color:var(--sun)}
+footer{background:var(--ink);color:#8793AB;text-align:center;padding:24px;font-size:.9rem;border-top:1px solid #26365A}
+
+@media (max-width:820px){
+  section{padding:72px 0}
+  .hero,.about,.contact{grid-template-columns:1fr;gap:40px}
+  .photo{order:-1;width:min(100%,280px)}
+  .menu-btn{display:block}
+  nav ul{display:none;position:absolute;top:64px;left:0;right:0;background:var(--bg);flex-direction:column;padding:16px 24px;gap:14px;border-bottom:1px solid var(--line)}
+  nav ul.open{display:flex}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#home" class="logo">Your Name</a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
+    <ul id="menu">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+<!-- 1. HOME -->
+<section id="home">
+  <div class="wrap hero">
+    <div>
+      <h1>Hi, I’m Your Name.</h1>
+      <p class="role">Your Profession, e.g. Software Developer</p>
+      <p class="desc">I build clear, reliable digital products. Replace this with one or two sentences about what you do and who you help.</p>
+      <div class="btns">
+        <a class="btn primary" href="#projects">View my work</a>
+        <a class="btn" href="#contact">Contact me</a>
+      </div>
+    </div>
+    <div class="photo">
+      <div class="frame">YN
+        <img src="images/profile.png" alt="Portrait of Adam Rais" onerror="this.remove()">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <h2>About me</h2>
+    <div class="about">
+      <div>
+        <p>Write a short introduction here: who you are, what you studied or do, and what drives you.</p>
+        <p>Add a second paragraph about what you are looking for, such as a job, freelance work or collaborations, and what you enjoy outside of work.</p>
+      </div>
+      <ul class="facts">
+        <li><span>Based in</span><b>Petaling Jaya, Malaysia</b></li>
+        <li><span>Focus</span><b>Your main field</b></li>
+        <li><span>Education</span><b>Your degree, University</b></li>
+        <li><span>Languages</span><b>English, Bahasa Malaysia</b></li>
+        <li><span>Availability</span><b>Open to opportunities</b></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 3. PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <h2>Projects</h2>
+    <div class="grid">
+      <article class="card">
+        <div class="thumb">Project 1</div>
+        <div class="body">
+          <h3>Project name</h3>
+          <p>One or two sentences on the problem, your role and the result.</p>
+          <div class="tags"><span>HTML</span><span>JavaScript</span><span>Firebase</span></div>
+          <div class="links"><a href="#">Live demo</a><a href="#">Source code</a></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb">Project 2</div>
+        <div class="body">
+          <h3>Project name</h3>
+          <p>One or two sentences on the problem, your role and the result.</p>
+          <div class="tags"><span>Python</span><span>SQL</span></div>
+          <div class="links"><a href="#">Live demo</a><a href="#">Source code</a></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb">Project 3</div>
+        <div class="body">
+          <h3>Project name</h3>
+          <p>One or two sentences on the problem, your role and the result.</p>
+          <div class="tags"><span>Design</span><span>Figma</span></div>
+          <div class="links"><a href="#">Case study</a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 4. TIMELINE -->
+<section id="timeline">
+  <div class="wrap">
+    <h2>Timeline</h2>
+    <ol class="timeline">
+      <li>
+        <time>2025 – Present</time>
+        <h3>Current role or study</h3>
+        <div class="org">Company or institution</div>
+        <p>What you do, and one achievement you are proud of.</p>
+      </li>
+      <li>
+        <time>2023 – 2025</time>
+        <h3>Previous role</h3>
+        <div class="org">Company or institution</div>
+        <p>Short summary of responsibilities and results.</p>
+      </li>
+      <li>
+        <time>2019 – 2023</time>
+        <h3>Degree or certification</h3>
+        <div class="org">University or college</div>
+        <p>Field of study, honours, relevant projects.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- 5. SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div class="group">
+        <h3>Technical</h3>
+        <div class="skill"><div><span>JavaScript</span><span>90%</span></div><div class="bar"><i style="width:90%"></i></div></div>
+        <div class="skill"><div><span>HTML &amp; CSS</span><span>85%</span></div><div class="bar"><i style="width:85%"></i></div></div>
+        <div class="skill"><div><span>Python</span><span>70%</span></div><div class="bar"><i style="width:70%"></i></div></div>
+      </div>
+      <div class="group">
+        <h3>Tools</h3>
+        <div class="skill"><div><span>Git &amp; GitHub</span><span>85%</span></div><div class="bar"><i style="width:85%"></i></div></div>
+        <div class="skill"><div><span>Firebase</span><span>75%</span></div><div class="bar"><i style="width:75%"></i></div></div>
+        <div class="skill"><div><span>Figma</span><span>65%</span></div><div class="bar"><i style="width:65%"></i></div></div>
+      </div>
+      <div class="group">
+        <h3>Soft skills</h3>
+        <div class="skill"><div><span>Communication</span><span>90%</span></div><div class="bar"><i style="width:90%"></i></div></div>
+        <div class="skill"><div><span>Problem solving</span><span>85%</span></div><div class="bar"><i style="width:85%"></i></div></div>
+        <div class="skill"><div><span>Teamwork</span><span>90%</span></div><div class="bar"><i style="width:90%"></i></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <div class="contact">
+      <div>
+        <p>Have a project or an opportunity in mind? Send a message and I will reply soon.</p>
+        <ul>
+          <li><a href="mailto:you@example.com">you@example.com</a></li>
+          <li><a href="https://linkedin.com/in/yourname">LinkedIn</a></li>
+          <li><a href="https://github.com/yourname">GitHub</a></li>
+        </ul>
+      </div>
+      <form id="contact-form">
+        <label>Name<input name="name" required autocomplete="name"></label>
+        <label>Email<input name="email" type="email" required autocomplete="email"></label>
+        <label>Message<textarea name="message" required></textarea></label>
+        <button class="btn" type="submit">Send message</button>
+        <div id="status" role="status"></div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>© <span id="yr"></span> Your Name. All rights reserved.</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Mobile menu
+const btn = document.querySelector('.menu-btn'), menu = document.getElementById('menu');
+btn.addEventListener('click', () => {
+  const open = menu.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open);
+});
+menu.addEventListener('click', e => { if (e.target.tagName === 'A') menu.classList.remove('open'); });
+
+/* Contact form.
+   Until Firebase is connected, this opens the visitor's email app.
+   To store messages in Firestore instead, see the setup steps provided with this file. */
+document.getElementById('contact-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const body = encodeURIComponent(`${f.get('message')}\n\nFrom: ${f.get('name')} (${f.get('email')})`);
+  window.location.href = `mailto:you@example.com?subject=Portfolio%20message&body=${body}`;
+  document.getElementById('status').textContent = 'Opening your email app…';
+});
+</script>
+</body>
+</html>
