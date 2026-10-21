@@ -45,10 +45,17 @@ nav ul a:hover{color:var(--ink)}
 
 /* Nav resume button */
 .nav-cta{margin-left:4px}
-.nav-cta a{color:var(--accent-ink);padding:8px 18px;transition:transform .2s ease, background .2s ease, box-shadow .2s ease;
+.nav-cta .btn{color:var(--accent-ink);padding:8px 18px;transition:transform .2s ease, background .2s ease, box-shadow .2s ease;
         display:inline-flex;flex-direction:row;align-items:center;gap:8px;line-height:1}
-.nav-cta a:hover{color:var(--accent-ink);background:var(--ink);border-color:var(--ink);transform:translateY(-2px);box-shadow:0 6px 16px rgba(20,33,61,.2)}
+.nav-cta .btn:hover{color:var(--accent-ink);background:var(--ink);border-color:var(--ink);transform:translateY(-2px);box-shadow:0 6px 16px rgba(20,33,61,.2)}
 .nav-cta .ico{width:16px;height:16px}
+
+/* Resume pop-up */
+.nav-cta .btn{display:inline-flex;align-items:center;gap:8px;line-height:1;padding:8px 18px}
+dialog.resume-modal{width:min(900px,96vw);max-height:88vh} /* A selector with an element and a class */
+.resume-frame{width:100%;height:76vh;border:1px solid var(--line);border-radius:12px;margin-top:16px;background:var(--bg)}
+.resume-fallback{font-size:.85rem;margin-top:10px}
+.resume-fallback a{color:var(--accent)}
 
 @media (max-width:820px){
   .nav-cta{margin-left:0}
@@ -279,10 +286,10 @@ input.invalid,textarea.invalid{border-color:#FF9E9E}
         </a>
       </li>
       <li class="nav-cta">
-        <a class="btn primary small" href="resume/Adam-Mendes-Resume.pdf" target="_blank" rel="noopener">
+        <button type="button" class="btn primary small" data-open="resume-modal" id="resume-open">
           <svg class="ico" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg>
           Resume
-        </a>
+        </button>
       </li>
     </ul>
   </div>
@@ -575,6 +582,26 @@ input.invalid,textarea.invalid{border-color:#FF9E9E}
 
 <footer>© <span id="yr"></span>DFolio. All rights reserved.</footer>
 
+<!-- Resume dialog -->
+<dialog id="resume-modal" class="modal resume-modal" aria-labelledby="resume-title">
+  <div class="modal-inner">
+    <div class="modal-head">
+      <h3 id="resume-title">Resume</h3>
+      <button class="close" data-close aria-label="Close">×</button>
+    </div>
+
+    <div class="modal-links">
+      <a class="btn primary small" href="resume/Adam_Rais_Resume.pdf" download>Download PDF</a>
+      <button type="button" class="btn small" id="resume-print">Print PDF</button>
+    </div>
+
+    <iframe id="resume-frame" class="resume-frame" title="Resume preview"></iframe>
+    <p class="resume-fallback">Can't see the preview?
+      <a href="resume/Adam_Rais_Resume.pdf" target="_blank" rel="noopener">Open the PDF in a new tab</a>.
+    </p>
+  </div>
+</dialog>
+
 <!-- Project details dialog -->
 <dialog id="project1" class="modal" aria-labelledby="project1-title">
   <div class="modal-inner">
@@ -693,6 +720,24 @@ btn.addEventListener('click', () => {
   btn.setAttribute('aria-expanded', open);
 });
 menu.addEventListener('click', e => { if (e.target.tagName === 'A') menu.classList.remove('open'); });
+
+// Resume pop-up
+const RESUME_URL = 'resume/Adam_Rais_Resume.pdf';
+const resumeFrame = document.getElementById('resume-frame');
+
+document.getElementById('resume-open').addEventListener('click', () => {
+  // Loads only when first opened
+  if (!resumeFrame.getAttribute('src')) resumeFrame.src = RESUME_URL + '#toolbar=0&navpanes=0&scrollbar=0&view=FitH';
+});
+
+document.getElementById('resume-print').addEventListener('click', () => {
+  try {
+    resumeFrame.contentWindow.focus();
+    resumeFrame.contentWindow.print();
+  } catch (err) {
+    window.open(RESUME_URL, '_blank');  // Fallback: Open the PDF, then print from there
+  }
+});
 
 // Project details pop-up
 document.querySelectorAll('[data-open]').forEach(btn => {
