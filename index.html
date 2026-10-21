@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Your Name | Portfolio</title>
-<meta name="description" content="Portfolio of Your Name, Your Profession.">
+<title>D-Folio | Adam Rais</title>
+<meta name="description" content="Portfolio of Adam Rais, QA Tester Intern.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -33,64 +33,143 @@ nav ul a{text-decoration:none;font-size:.95rem;color:var(--muted);font-weight:50
 nav ul a:hover{color:var(--ink)}
 .menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:8px;padding:6px 12px;font:inherit;cursor:pointer;color:var(--ink)}
 
+/* Nav icons and logo */
+nav ul{gap:20px}
+nav li{display:flex;align-items:center}
+nav ul a{display:inline-flex;align-items:center;gap:7px;line-height:1}
+nav ul a:hover{color:var(--ink)}
+.ico{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;display:block}
+.ico.fill{fill:currentColor;stroke:none}
+.social a{border-radius:50%;display:flex;align-items:center;justify-content:center;width:36px;height:36px;padding:0}
+.social a:hover{color:var(--accent);background:var(--surface)}
+
+/* Transition logo */
+.social a{transition:transform .2s ease, background .2s ease, color .2s ease}
+.social a:hover{transform:scale(1.2)}
+
+.social .ico{width:20px;height:20px}
+.logo{display:inline-flex;align-items:center;gap:10px}
+.logo-mark{position:relative;width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:.8rem;overflow:hidden}
+.logo-mark img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
 /* Home */
 #home{padding:72px 0 96px}
 .hero{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:center}
-.hero h1{font-size:clamp(2.8rem,7vw,5.2rem);font-weight:800}
+.hero h1{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800}
 .hero .role{font-family:var(--head);font-weight:500;font-size:1.3rem;color:var(--accent);margin:18px 0 14px}
-.hero p.desc{color:var(--muted);max-width:46ch;margin-bottom:32px}
+.hero p.desc1 .hero p.desc2{color:var(--muted);max-width:46ch}
+.hero p.desc1{font-weight:500;margin-bottom:12px}
+.hero p.desc2{margin-bottom:32px;text-align:justify}
 .btns{display:flex;gap:14px;flex-wrap:wrap}
 .btn{display:inline-block;padding:14px 26px;border-radius:999px;font-weight:500;text-decoration:none;border:2px solid var(--ink);transition:transform .15s,background .15s}
 .btn:hover{transform:translateY(-2px)}
 .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.photo{position:relative;justify-self:center;width:min(100%,360px);aspect-ratio:4/5}
-.photo::before{content:"";position:absolute;inset:18px -18px -18px 18px;background:var(--sun);border-radius:180px 180px 24px 24px}
-.photo .frame{position:relative;width:100%;height:100%;border-radius:180px 180px 24px 24px;overflow:hidden;background:var(--ink);display:grid;place-items:center;color:#fff;font-family:var(--head);font-size:4rem;font-weight:800}
-.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* Photo stack */
+.photo{position:relative;justify-self:center;width:min(100%,460px);aspect-ratio:4/5}
+.pic{
+  position:absolute;top:0;left:0;width:88%;height:88%;
+  border:4px solid var(--sun);border-radius:180px 180px 24px 24px;overflow:hidden;
+  background:var(--ink);color:#fff;font-family:var(--head);font-size:3rem;font-weight:800;
+  display:grid;place-items:center;padding:0;cursor:default;
+  transition:transform .5s cubic-bezier(.4,0,.2,1), filter .5s ease, box-shadow .5s ease;
+}
+.pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+
+/* Which one is in front */
+.photo[data-front="a"] .a, .photo[data-front="b"] .b{
+  z-index:2;transform:translate(0,0);box-shadow:0 16px 36px rgba(20,33,61,.25);
+}
+.photo[data-front="a"] .b, .photo[data-front="b"] .a{
+  z-index:1;transform:translate(13.6%,13.6%);filter:brightness(.8);cursor:pointer;
+}
+.photo[data-front="a"] .b:hover, .photo[data-front="b"] .a:hover{
+  transform:translate(15%,15%);filter:brightness(1);
+}
+
+@media (prefers-reduced-motion:reduce){
+  .pic{transition:none}
+}
 
 /* About */
 .about{display:grid;grid-template-columns:1fr 1fr;gap:56px}
-.about p{color:var(--muted);margin-bottom:18px;max-width:60ch}
-.facts{list-style:none;background:var(--surface);border-radius:20px;padding:12px 28px;align-self:start}
-.facts li{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.about p{color:var(--muted);margin-bottom:18px;max-width:60ch;text-align:justify}
+.facts{list-style:none;background:var(--surface);border-radius:20px;padding:12px 28px;align-self:start;transition:transform .25s ease, box-shadow .25s ease}
+.facts:hover{transform:scale(1.03);box-shadow:0 12px 28px rgba(20,33,61,.12)}
+.facts li{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);transition:background .2s ease, padding .2s ease;}
+.facts li:hover{background:var(--bg);padding-left:12px;padding-right:12px;border-radius:10px}
 .facts li:last-child{border:0}
 .facts span{color:var(--muted)}
 .facts b{font-weight:500;text-align:right}
 
 /* Projects */
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:24px}
-.card{background:var(--surface);border-radius:20px;overflow:hidden;display:flex;flex-direction:column}
-.thumb{height:170px;display:grid;place-items:center;font-family:var(--head);font-weight:800;font-size:2.2rem;color:#fff}
-.thumb img{width:100%;height:100%;object-fit:cover}
+.card{background:var(--surface);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s ease, box-shadow .25s ease}
+.card:hover{transform:scale(1.03);box-shadow:0 12px 28px rgba(20,33,61,.12)}
+.thumb{height:170px;display:grid;place-items:center;font-family:var(--head);font-weight:800;font-size:2.2rem;color:#fff;position:relative;overflow:hidden}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .card:nth-child(1) .thumb{background:var(--accent)}
 .card:nth-child(2) .thumb{background:var(--ink)}
 .card:nth-child(3) .thumb{background:#E4572E}
 .card .body{padding:24px;display:flex;flex-direction:column;gap:12px;flex:1}
 .card h3{font-size:1.35rem}
-.card p{color:var(--muted);font-size:.97rem}
+.card p{color:var(--muted);font-size:.97rem;text-align:justify;flex:1}
 .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
 .tags span{background:var(--bg);border-radius:999px;padding:3px 12px;font-size:.85rem}
 .links{display:flex;gap:18px;font-weight:500;font-size:.95rem}
+.card .btn{margin-top:8px}
+
+/* Details pop-up */
+button.btn{background:transparent;color:inherit;font:inherit;cursor:pointer}
+.btn.small{padding:9px 18px;font-size:.92rem}
+.modal{border:0;border-radius:20px;padding:0;width:min(680px,92vw);max-height:88vh;margin:auto;background:var(--surface);color:var(--ink)}
+.modal::backdrop{background:rgba(20,33,61,.6)}
+.modal-inner{padding:32px}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:16px}
+.modal-head h3{font-size:1.7rem}
+.close{background:var(--bg);border:0;border-radius:50%;width:38px;height:38px;font-size:1.4rem;line-height:1;cursor:pointer;color:var(--ink);flex-shrink:0}
+.modal-links{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.modal h4{font-family:var(--head);font-size:1.05rem;margin:24px 0 6px}
+.modal p,.modal li{color:var(--muted)}
+.modal ul{padding-left:20px;display:grid;gap:6px}
+body:has(dialog[open]){overflow:hidden}
 
 /* Timeline */
 .timeline{position:relative;list-style:none;padding-left:34px}
 .timeline::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--line)}
-.timeline li{position:relative;padding-bottom:40px}
-.timeline li:last-child{padding-bottom:0}
-.timeline li::before{content:"";position:absolute;left:-34px;top:7px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:4px solid var(--accent)}
-.timeline time{font-weight:500;color:var(--accent);font-size:.95rem}
-.timeline h3{font-size:1.3rem;margin:4px 0 2px}
-.timeline .org{color:var(--muted);margin-bottom:6px}
-.timeline p{max-width:62ch}
+.timeline > li{position:relative;padding-bottom:24px}
+.timeline > li:last-child{padding-bottom:0}
+.timeline > li::before{content:"";position:absolute;left:-34px;top:32px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:4px solid var(--accent)}
+
+.t-card{background:var(--surface);border-radius:20px;padding:28px;transition:transform .25s ease, box-shadow .25s ease}
+.t-card:hover{transform:scale(1.02);box-shadow:0 12px 28px rgba(20,33,61,.12)}
+.t-card time{display:inline-block;background:var(--bg);color:var(--accent);font-weight:500;font-size:.85rem;padding:3px 14px;border-radius:999px;margin-bottom:12px}
+.t-card h3{font-size:1.3rem;margin-bottom:2px}
+.t-card .org{color:var(--muted);margin-bottom:12px}
+.t-card h4{font-family:var(--head);font-size:1rem;margin:18px 0 4px}
+.t-card p{color:var(--muted);max-width:64ch}
+.t-card ul{color:var(--muted);padding-left:20px;display:grid;gap:4px;max-width:64ch}
+.t-card ul b{color:var(--ink);font-weight:500}
+
+@media (prefers-reduced-motion:reduce){
+  .t-card{transition:none}
+  .t-card:hover{transform:none}
+}
 
 /* Skills */
-.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:24px}
-.group{background:var(--surface);border-radius:20px;padding:28px}
-.group h3{font-size:1.2rem;margin-bottom:20px}
-.skill{margin-bottom:16px}
-.skill:last-child{margin-bottom:0}
-.skill div{display:flex;justify-content:space-between;font-size:.95rem;margin-bottom:6px}
-.bar{height:8px;background:var(--bg);border-radius:99px;overflow:hidden}
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.skill-card{background:var(--surface);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:12px}
+.skill-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.skill-card h3{font-size:1.2rem}
+.skill-card p{color:var(--muted);font-size:.95rem;}
+.skill-card{transition:transform .25s ease, box-shadow .25s ease}
+.skill-card:hover{transform:scale(1.04);box-shadow:0 12px 28px rgba(20,33,61,.12)}
+.level{font-size:.8rem;font-weight:500;padding:3px 12px;border-radius:999px;white-space:nowrap}
+.level.beginner{background:#FFF1CC;color:#7A5600}
+.level.intermediate{background:#DDE6FF;color:#1B3FBF}
+.level.advanced{background:#D6F2E3;color:#1B6B43}
+.meter{display:flex;align-items:center;gap:12px;margin-top:auto;font-size:.9rem;font-weight:500}
+.bar{flex:1;height:8px;background:var(--bg);border-radius:99px;overflow:hidden}
 .bar i{display:block;height:100%;background:var(--accent);border-radius:99px}
 
 /* Contact */
@@ -99,8 +178,7 @@ nav ul a:hover{color:var(--ink)}
 .contact{display:grid;grid-template-columns:1fr 1.1fr;gap:56px}
 .contact p{color:#B8C2D6;max-width:40ch;margin-bottom:24px}
 .contact ul{list-style:none;display:grid;gap:10px}
-.contact ul a{color:var(--sun);text-decoration:none;font-weight:500}
-.contact ul a:hover{text-decoration:underline}
+.contact li{margin-bottom:6px}
 form{display:grid;gap:16px}
 label{display:grid;gap:6px;font-size:.95rem;color:#B8C2D6}
 input,textarea{font:inherit;padding:13px 16px;border-radius:12px;border:1px solid #3A4A6E;background:#1C2C4F;color:#fff}
@@ -108,6 +186,36 @@ textarea{min-height:130px;resize:vertical}
 form .btn{border-color:var(--sun);background:var(--sun);color:var(--ink);cursor:pointer;font:inherit;font-weight:500;justify-self:start}
 #status{font-size:.95rem;min-height:1.4em;color:var(--sun)}
 footer{background:var(--ink);color:#8793AB;text-align:center;padding:24px;font-size:.9rem;border-top:1px solid #26365A}
+
+/* Contact link buttons */
+.contact-links{display:flex;flex-wrap:wrap;gap:12px;}
+.contact-links a{
+  display:inline-flex;align-items:center;gap:10px;
+  border-radius:18px;padding:12px 20px;
+  border:2px solid #3A4A6E;color:#fff;font-weight:500;text-decoration:none;
+  transition:transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+.contact-links .label{display:flex;flex-direction:column;line-height:1.25;font-weight:500}
+.contact-links small{font-size:.8rem;font-weight:400;opacity:.75;overflow-wrap:anywhere}
+
+.contact-links a:hover,
+.contact-links a:focus-visible{
+  background:var(--sun);border-color:var(--sun);color:var(--ink);
+  transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.25);
+  text-decoration:none;
+}
+.contact-links .ico{transition:transform .2s ease}
+.contact-links a:hover .ico{transform:scale(1.15)}
+
+@media (prefers-reduced-motion:reduce){
+  .contact-links a,.contact-links .ico{transition:none}
+  .contact-links a:hover{transform:none}
+}
+
+.err{color:#FF9E9E;font-size:.85rem;min-height:1.2em}
+input.invalid,textarea.invalid{border-color:#FF9E9E}
+#status.ok{color:#8DE0B0}
 
 @media (max-width:820px){
   section{padding:72px 0}
@@ -117,22 +225,40 @@ footer{background:var(--ink);color:#8793AB;text-align:center;padding:24px;font-s
   nav ul{display:none;position:absolute;top:64px;left:0;right:0;background:var(--bg);flex-direction:column;padding:16px 24px;gap:14px;border-bottom:1px solid var(--line)}
   nav ul.open{display:flex}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}.btn{transition:none}
+}
+
 </style>
 </head>
 <body>
 
 <nav>
   <div class="wrap">
-    <a href="#home" class="logo">Your Name</a>
+    <a href="#home" class="logo">
+      <span class="logo-mark">AM
+        <img src="images/logo.png" alt="" onerror="this.remove()">
+      </span>
+      Adam Mendes
+    </a>
     <button class="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
     <ul id="menu">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#timeline">Timeline</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#home"><svg class="ico" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>Home</a></li>
+      <li><a href="#about"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>About</a></li>
+      <li><a href="#projects"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2"/></svg>Projects</a></li>
+      <li><a href="#timeline"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Timeline</a></li>
+      <li><a href="#skills"><svg class="ico" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>Skills</a></li>
+      <li><a href="#contact"><svg class="ico" viewBox="0 0 24 24"><path d="M4 5h16v12H8l-4 4V5z"/></svg>Contact</a></li>
+      <li class="social">
+        <a href="https://www.linkedin.com/in/adam-mendes" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+          <svg class="ico fill" viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.01 5 2.5 2.5 0 01.01-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V21h-4z"/></svg>
+        </a>
+      </li>
+      <li class="social">
+        <a href="adammendes1311@gmail.com" aria-label="Email" title="Email">
+          <svg class="ico" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        </a>
+      </li>
     </ul>
   </div>
 </nav>
@@ -142,18 +268,26 @@ footer{background:var(--ink);color:#8793AB;text-align:center;padding:24px;font-s
 <section id="home">
   <div class="wrap hero">
     <div>
-      <h1>Hi, I’m Your Name.</h1>
-      <p class="role">Your Profession, e.g. Software Developer</p>
-      <p class="desc">I build clear, reliable digital products. Replace this with one or two sentences about what you do and who you help.</p>
+      <h1>Hi, I’m Adam Rais.</h1>
+      <p class="role">Quality Assurance Intern</p>
+      <p class="desc1">A Diploma in Computer Science student at UPTM.</p>
+      <p class="desc2">Experienced in software testing and web and mobile application development, 
+        with a passion for learning and professional growth in IT.
+      </p>
       <div class="btns">
         <a class="btn primary" href="#projects">View my work</a>
         <a class="btn" href="#contact">Contact me</a>
       </div>
     </div>
-    <div class="photo">
-      <div class="frame">YN
-        <img src="images/profile.png" alt="Portrait of Adam Rais" onerror="this.remove()">
-      </div>
+    <div class="photo" id="photo-stack" data-front="a">
+      <button type="button" class="pic a" aria-label="Show photo 1">
+        <span>YN</span>
+        <img src="images/profile.png" alt="Portrait of Adam Mendes" onerror="this.remove()">
+      </button>
+      <button type="button" class="pic b" aria-label="Show photo 2">
+        <span>AM</span>
+        <img src="images/profile2.jpeg" alt="Second portrait of Adam Mendes" onerror="this.remove()">
+      </button>
     </div>
   </div>
 </section>
@@ -164,15 +298,22 @@ footer{background:var(--ink);color:#8793AB;text-align:center;padding:24px;font-s
     <h2>About me</h2>
     <div class="about">
       <div>
-        <p>Write a short introduction here: who you are, what you studied or do, and what drives you.</p>
-        <p>Add a second paragraph about what you are looking for, such as a job, freelance work or collaborations, and what you enjoy outside of work.</p>
+        <p>I am a <b>Diploma in Computer Science student</b> with a background in software development and a growing interest in software quality assurance. 
+          Currently, I am undertaking <b>a 14-week internship at Entomo Digital Sdn. Bhd. as a Quality Assurance Tester Intern</b>, 
+          where I gain hands-on experience in software testing within an Agile environment, writing test cases, and contributing to a government healthcare platform.
+        </p>
+
+        <p>My technical experience includes Java, Python, HTML, and CSS. I am also exploring technologies and frameworks such as Tailwind CSS and Node.js 
+          to broaden my development knowledge. Driven by curiosity and a passion for continuous learning, I enjoy exploring new technologies, 
+          strengthening my technical abilities, and discovering the ever-evolving world of IT.
+        </p>
       </div>
       <ul class="facts">
-        <li><span>Based in</span><b>Petaling Jaya, Malaysia</b></li>
-        <li><span>Focus</span><b>Your main field</b></li>
-        <li><span>Education</span><b>Your degree, University</b></li>
+        <li><span>Education</span><b>Diploma in Computer Science, UPTM</b></li>
+        <li><span>CGPA</span><b>3.90</b></li>
+        <li><span>Focus</span><b>Quality Assurance, Software Development</b></li>
         <li><span>Languages</span><b>English, Bahasa Malaysia</b></li>
-        <li><span>Availability</span><b>Open to opportunities</b></li>
+        <li><span>Availability</span><b>Open to opportunities!</b></li>
       </ul>
     </div>
   </div>
@@ -184,30 +325,38 @@ footer{background:var(--ink);color:#8793AB;text-align:center;padding:24px;font-s
     <h2>Projects</h2>
     <div class="grid">
       <article class="card">
-        <div class="thumb">Project 1</div>
+        <div class="thumb">
+          <img src="images/thumb-project1.png" alt="Thumbnail of Project 1" loading="lazy">
+        </div>
         <div class="body">
-          <h3>Project name</h3>
-          <p>One or two sentences on the problem, your role and the result.</p>
-          <div class="tags"><span>HTML</span><span>JavaScript</span><span>Firebase</span></div>
-          <div class="links"><a href="#">Live demo</a><a href="#">Source code</a></div>
+          <h3>MYPOCKET: Personal Planner and Money Manager</h3>
+          <p>A final year project that assists users in staying organised by combining essential functions such as daily planner, money manager and to-do list.</p>
+          <div class="tags"><span>Kotlin</span><span>Android Studio</span><span>Firebase</span><span>Final Year Project</span></div>
+          <button class="btn small" data-open="project1">View details</button>
         </div>
       </article>
+
       <article class="card">
-        <div class="thumb">Project 2</div>
+        <div class="thumb">
+          <img src="images/thumb-project2.png" alt="Thumbnail of Project 2" loading="lazy">
+        </div>
         <div class="body">
-          <h3>Project name</h3>
-          <p>One or two sentences on the problem, your role and the result.</p>
-          <div class="tags"><span>Python</span><span>SQL</span></div>
-          <div class="links"><a href="#">Live demo</a><a href="#">Source code</a></div>
+          <h3>Industrial Training Mini Project: Training Module Revamp</h3>
+          <p>Industrial Training special Mini Project: Revamping the existing training module for the entomo Portal to improve user engagement and learning outcomes.</p>
+          <div class="tags"></span><span>Google Antigravity</span><span>Firebase</span><span>Figma</span><span>Industrial Training</span></div>
+          <button class="btn small" data-open="project2">View details</button>
         </div>
       </article>
+
       <article class="card">
-        <div class="thumb">Project 3</div>
+        <div class="thumb">
+          <img src="images/thumb-placeholder.png" alt="Thumbnail of Project 3" loading="lazy">
+        </div>
         <div class="body">
-          <h3>Project name</h3>
-          <p>One or two sentences on the problem, your role and the result.</p>
-          <div class="tags"><span>Design</span><span>Figma</span></div>
-          <div class="links"><a href="#">Case study</a></div>
+          <h3>MyTech</h3>
+          <p>Web-based electronic products management system, designed specifically for demonstration in managing and tracking electronic products.</p>
+          <div class="tags"><span>Adobe Dreamweaver</span><span>MySQL</span><span>HTML</span><span>CSS</span><span>PHP</span></div>
+          <button class="btn small" data-open="project3">View details</button>
         </div>
       </article>
     </div>
@@ -219,24 +368,44 @@ footer{background:var(--ink);color:#8793AB;text-align:center;padding:24px;font-s
   <div class="wrap">
     <h2>Timeline</h2>
     <ol class="timeline">
+
       <li>
-        <time>2025 – Present</time>
-        <h3>Current role or study</h3>
-        <div class="org">Company or institution</div>
-        <p>What you do, and one achievement you are proud of.</p>
+        <article class="t-card">
+          <time>2026 – Present</time>
+          <h3>Quality Assurance Intern</h3>
+          <div class="org">Entomo Digital Sdn. Bhd.</div>
+          <p>Performed software testing in an Agile environment, prepared and executed test cases,
+            and verified application functionality to identify defects and ensure software quality.
+            Contributed to testing a government healthcare platform and collaborated with the team
+            to support reliable application performance.</p>
+        </article>
       </li>
+
       <li>
-        <time>2023 – 2025</time>
-        <h3>Previous role</h3>
-        <div class="org">Company or institution</div>
-        <p>Short summary of responsibilities and results.</p>
+        <article class="t-card">
+          <time>2024 – 2026</time>
+          <h3>Diploma in Computer Science</h3>
+          <div class="org">Universiti Poly-Tech Malaysia (UPTM)</div>
+
+          <h4>Field of study</h4>
+          <p>Computer Science, with academic exposure to software development, database management,
+            computer networking, and cybersecurity.</p>
+
+          <h4>Honours &amp; achievements</h4>
+          <ul>
+            <li>Received the Senate Award in the first semester.</li>
+            <li>Achieved the Dean's List Award every semester.</li>
+          </ul>
+
+          <h4>Relevant projects</h4>
+          <ul>
+            <li><b>MYPOCKET (Final Year Project):</b> A mobile application for task management and personal finance assistance.</li>
+            <li><b>MyTech (Web Application Development):</b> Developed a web application as part of the Web Application Development subject.</li>
+            <li><b>Cloud Computing:</b> Completed an academic project involving cloud computing concepts and technologies.</li>
+          </ul>
+        </article>
       </li>
-      <li>
-        <time>2019 – 2023</time>
-        <h3>Degree or certification</h3>
-        <div class="org">University or college</div>
-        <p>Field of study, honours, relevant projects.</p>
-      </li>
+
     </ol>
   </div>
 </section>
@@ -246,24 +415,79 @@ footer{background:var(--ink);color:#8793AB;text-align:center;padding:24px;font-s
   <div class="wrap">
     <h2>Skills</h2>
     <div class="skills">
-      <div class="group">
-        <h3>Technical</h3>
-        <div class="skill"><div><span>JavaScript</span><span>90%</span></div><div class="bar"><i style="width:90%"></i></div></div>
-        <div class="skill"><div><span>HTML &amp; CSS</span><span>85%</span></div><div class="bar"><i style="width:85%"></i></div></div>
-        <div class="skill"><div><span>Python</span><span>70%</span></div><div class="bar"><i style="width:70%"></i></div></div>
-      </div>
-      <div class="group">
-        <h3>Tools</h3>
-        <div class="skill"><div><span>Git &amp; GitHub</span><span>85%</span></div><div class="bar"><i style="width:85%"></i></div></div>
-        <div class="skill"><div><span>Firebase</span><span>75%</span></div><div class="bar"><i style="width:75%"></i></div></div>
-        <div class="skill"><div><span>Figma</span><span>65%</span></div><div class="bar"><i style="width:65%"></i></div></div>
-      </div>
-      <div class="group">
-        <h3>Soft skills</h3>
-        <div class="skill"><div><span>Communication</span><span>90%</span></div><div class="bar"><i style="width:90%"></i></div></div>
-        <div class="skill"><div><span>Problem solving</span><span>85%</span></div><div class="bar"><i style="width:85%"></i></div></div>
-        <div class="skill"><div><span>Teamwork</span><span>90%</span></div><div class="bar"><i style="width:90%"></i></div></div>
-      </div>
+
+      <article class="skill-card">
+        <div class="skill-top">
+          <h3>Java</h3>
+          <span class="level advanced">Advanced</span>
+        </div>
+        <p>Knowledge of object-oriented programming and developing applications using Java.</p>
+        <div class="meter">
+          <div class="bar"><i style="width:90%"></i></div>
+          <span>90%</span>
+        </div>
+      </article>
+
+      <article class="skill-card">
+        <div class="skill-top">
+          <h3>HTML &amp; CSS</h3>
+          <span class="level advanced">Advanced</span>
+        </div>
+        <p>Creating and styling web pages with structured layouts and responsive designs.</p>
+        <div class="meter">
+          <div class="bar"><i style="width:85%"></i></div>
+          <span>85%</span>
+        </div>
+      </article>
+
+      <article class="skill-card">
+        <div class="skill-top">
+          <h3>JavaScript</h3>
+          <span class="level intermediate">Intermediate</span>
+        </div>
+        <p>Implementing interactive features and dynamic behavior in web applications.</p>
+        <div class="meter">
+          <div class="bar"><i style="width:70%"></i></div>
+          <span>70%</span>
+        </div>
+      </article>
+
+      <article class="skill-card">
+        <div class="skill-top">
+          <h3>Software Testing</h3>
+          <span class="level beginner">Beginner</span>
+        </div>
+        <p>Writing and executing test cases, identifying defects, and verifying application functionality to ensure software quality.</p>
+        <div class="meter">
+          <div class="bar"><i style="width:50%"></i></div>
+          <span>50%</span>
+        </div>
+      </article>
+
+      <article class="skill-card">
+        <div class="skill-top">
+          <h3>Cloud Computing</h3>
+          <span class="level beginner">Beginner</span>
+        </div>
+        <p>Familiarity with cloud computing concepts, cloud services, and deploying or managing resources in cloud environments.</p>
+        <div class="meter">
+          <div class="bar"><i style="width:40%"></i></div>
+          <span>40%</span>
+        </div>
+      </article>
+
+      <article class="skill-card">
+        <div class="skill-top">
+          <h3>Soft Skills</h3>
+          <span class="level advanced">Advanced</span>
+        </div>
+        <p>Strong communication, teamwork, problem-solving, adaptability, and willingness to learn new technologies and approaches.</p>
+        <div class="meter">
+          <div class="bar"><i style="width:95%"></i></div>
+          <span>95%</span>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
@@ -275,17 +499,45 @@ footer{background:var(--ink);color:#8793AB;text-align:center;padding:24px;font-s
     <div class="contact">
       <div>
         <p>Have a project or an opportunity in mind? Send a message and I will reply soon.</p>
-        <ul>
-          <li><a href="mailto:you@example.com">you@example.com</a></li>
-          <li><a href="https://linkedin.com/in/yourname">LinkedIn</a></li>
-          <li><a href="https://github.com/yourname">GitHub</a></li>
+        <ul class="contact-links">
+          <li>
+            <a href="mailto:adammendes1311@gmail.com">
+              <svg class="ico" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+              <span class="label">Email<small>adammendes1311@gmail.com</small></span>
+            </a>
+          </li>
+  
+          <li>
+            <a href="https://linkedin.com/in/adam-mendes" target="_blank" rel="noopener">
+              <svg class="ico fill" viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.01 5 2.5 2.5 0 01.01-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V21h-4z"/></svg>
+              <span class="label">LinkedIn<small>Adam Rais</small></span>
+            </a>
+          </li>
+
+          <li>
+            <a href="https://github.com/adammendes-1306" target="_blank" rel="noopener">
+              <svg class="ico" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 00-.9-2.6c3.1-.3 6.4-1.5 6.4-7a5.4 5.4 0 00-1.5-3.8 5 5 0 00-.1-3.7s-1.2-.3-3.9 1.5a13.4 13.4 0 00-7 0C6.3 1.4 5.1 1.7 5.1 1.7a5 5 0 00-.1 3.7A5.4 5.4 0 003.5 9.2c0 5.5 3.3 6.7 6.4 7a3.4 3.4 0 00-.9 2.6V22"/></svg>
+              <span class="label">GitHub<small>@adammendes-1306</small></span>
+            </a>
+          </li>
         </ul>
       </div>
-      <form id="contact-form">
-        <label>Name<input name="name" required autocomplete="name"></label>
-        <label>Email<input name="email" type="email" required autocomplete="email"></label>
-        <label>Message<textarea name="message" required></textarea></label>
-        <button class="btn" type="submit">Send message</button>
+      <form id="contact-form" novalidate>
+        <label>Name
+          <input name="name" id="f-name" autocomplete="name" aria-describedby="err-name">
+          <span class="err" id="err-name"></span>
+        </label>
+  
+        <label>Email
+          <input name="email" id="f-email" type="email" autocomplete="email" aria-describedby="err-email">
+          <span class="err" id="err-email"></span>
+        </label>
+  
+        <label>Message
+          <textarea name="message" id="f-message" aria-describedby="err-message"></textarea>
+          <span class="err" id="err-message"></span>
+        </label>
+        <button class="btn" type="submit">Submit</button>
         <div id="status" role="status"></div>
       </form>
     </div>
@@ -293,7 +545,115 @@ footer{background:var(--ink);color:#8793AB;text-align:center;padding:24px;font-s
 </section>
 </main>
 
-<footer>© <span id="yr"></span> Your Name. All rights reserved.</footer>
+<footer>© <span id="yr"></span>DFolio. All rights reserved.</footer>
+
+<!-- Project details dialog -->
+<dialog id="project1" class="modal" aria-labelledby="project1-title">
+  <div class="modal-inner">
+    <div class="modal-head">
+      <h3 id="project1-title">MYPOCKET: Personal Planner and Money Manager</h3>
+      <button class="close" data-close aria-label="Close">×</button>
+    </div>
+
+    <div class="modal-links">
+      <a class="btn primary small" href="https://drive.google.com/file/d/1sWs66JF23KKQ684uGd8sjTegRuYi2unG/view?usp=sharing" target="_blank" rel="noopener">FYP Poster</a>
+      <a class="btn small" href="https://github.com/adammendes-1306/mypocket.git" target="_blank" rel="noopener">Source code</a>
+      <a class="btn small" href="https://drive.google.com/file/d/1yJ8fK4NyjojSN_TDCzvjJXcBRGyygMco/view?usp=sharing" target="_blank" rel="noopener">Manual e-book</a>
+    </div>
+
+    <h4>Project description</h4>
+    <p style="text-align: justify;">MYPOCKET is a mobile application designed to help users stay organised by
+      combining essential functions such as daily planner, money manager and to-do
+      list. It allows users to plan their schedules, track their finances and
+      manage plans within a single app.</p>
+
+      <p style="text-align: justify;">By bringing these functions together,
+      MYPOCKET helps users improve their
+      productivity and maintain better control
+      over daily activities and finances.</p>
+
+    <h4>Problem statement</h4>
+    <ul>
+      <li>Inefficiency of app fragmentation</li>
+      <li>Difficulty in managing daily ideas</li>
+      <li>Lack of financial awareness</li>
+    </ul>
+
+    <h4>Objectives</h4>
+    <ul>
+      <li>To build an integrated application that eliminates app fragmentation</li>
+      <li>To develop a functional daily planner application for users to organize plans and schedules</li>
+      <li>To encourage financial awareness by providing a financial tracking feature</li>
+    </ul>
+
+    <h4>Achievements and learnings</h4>
+    <ul>
+      <li>Achieved</li>
+          <p style="text-align: justify;">MYPOCKET platform makes it easier by putting everything in one place. People can use MYPOCKET platform to manage their life without getting frustrated.
+            MYPOCKET platform is very useful, for managing events and tasks and wallet management.</p>
+          <p style="text-align: justify;">By recording daily transactions, users gain a clearer
+            understanding of their financial patterns over time. To further enhance this awareness, a
+            visualization summary was implemented using a pie chart, allowing users to interpret their financial
+            data intuitively than through text alone</p>
+      <li>What you learned</li>
+          <p style="text-align: justify;">Utilized modern web technologies to create a responsive and user-friendly interface.</p>
+    </ul>
+  </div>
+</dialog>
+
+<dialog id="project2" class="modal" aria-labelledby="project2-title">
+  <div class="modal-inner">
+    <div class="modal-head">
+      <h3 id="project2-title">Industrial Training Mini Project - Training Module Revamp</h3>
+      <button class="close" data-close aria-label="Close">×</button>
+    </div>
+
+    <div class="modal-links">
+      <a class="btn primary small" href="https://drive.google.com/file/d/1sWs66JF23KKQ684uGd8sjTegRuYi2unG/view?usp=sharing" target="_blank" rel="noopener">Website Demo Link</a>
+      <a class="btn small" href="https://github.com/adammendes-1306/mypocket.git" target="_blank" rel="noopener">Source code</a>
+    </div>
+
+    <h4>Project description</h4>
+    <p style="text-align: justify;">Revamped the existing training module in the Entomo Portal by introducing a new training workflow with enhanced flexibility and functionality. 
+      The updated module allows administrators to assign training to employees, track training completion, and publish training materials for employees to self-assign. 
+      Employees can also complete assessments after training sessions to evaluate their understanding and knowledge. These improvements aim to provide a more flexible and engaging 
+      learning experience while supporting better training management and learning outcomes.
+    </p>
+
+    <h4>Problem statement</h4>
+    <ul>
+      <li>Time-consuming onboarding process</li>
+      <li>Difficulty tracking training progress</li>
+      <li>No centralized storage for training materials</li>
+    </ul>
+
+    <h4>Objectives</h4>
+    <ul>
+      <li>To streamline the onboarding process through a more efficient training workflow</li>
+      <li>To improve the monitoring of employee training progress and completion</li>
+      <li>To centralize training materials in one accessible platform</li>
+    </ul>
+  </div>
+</dialog>
+
+<dialog id="project3" class="modal" aria-labelledby="project3-title">
+  <div class="modal-inner">
+    <div class="modal-head">
+      <h3 id="project3-title">MyTech</h3>
+      <button class="close" data-close aria-label="Close">×</button>
+    </div>
+
+    <div class="modal-links">
+      <a class="btn primary small" href="https://github.com/adammendes-1306/mytech.git" target="_blank" rel="noopener">Source code</a>
+    </div>
+
+    <h4>Project description</h4>
+    <p style="text-align: justify;">Developed a demonstration web application to showcase the end-to-end e-commerce user journey, 
+      from browsing products and adding items to the cart to completing payments and tracking order status. The application features 
+      a centralized product catalog stored in a single database, allowing users to browse, select, and purchase products seamlessly.
+    </p>
+  </div>
+</dialog>
 
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
@@ -306,15 +666,104 @@ btn.addEventListener('click', () => {
 });
 menu.addEventListener('click', e => { if (e.target.tagName === 'A') menu.classList.remove('open'); });
 
-/* Contact form.
-   Until Firebase is connected, this opens the visitor's email app.
-   To store messages in Firestore instead, see the setup steps provided with this file. */
-document.getElementById('contact-form').addEventListener('submit', e => {
+// Project details pop-up
+document.querySelectorAll('[data-open]').forEach(btn => {
+  btn.addEventListener('click', () => document.getElementById(btn.dataset.open).showModal());
+});
+document.querySelectorAll('dialog').forEach(dlg => {
+  dlg.addEventListener('click', e => {
+    if (e.target === dlg || e.target.hasAttribute('data-close')) dlg.close();
+  });
+});
+
+// Contact form validation
+const form = document.getElementById('contact-form');
+const rules = {
+  name:    v => v.length < 2 ? 'Please enter your name (at least 2 characters).' : '',
+  email:   v => !v ? 'Please enter your email.'
+              : !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? 'Enter a valid email, e.g. name@domain.com.' : '',
+  message: v => v.length < 10 ? 'Please write a message (at least 10 characters).' : ''
+};
+
+function check(field) {
+  const el = form.elements[field];
+  const msg = rules[field](el.value.trim());
+  document.getElementById('err-' + field).textContent = msg;
+  el.classList.toggle('invalid', !!msg);
+  el.setAttribute('aria-invalid', !!msg);
+  return !msg;
+}
+
+// Re-check each field as the user leaves it or types
+Object.keys(rules).forEach(f => {
+  form.elements[f].addEventListener('blur', () => check(f));
+  form.elements[f].addEventListener('input', () => {
+    if (form.elements[f].classList.contains('invalid')) check(f);
+  });
+});
+
+// Form submission via Web3Forms API
+form.addEventListener('submit', async e => {
   e.preventDefault();
-  const f = new FormData(e.target);
-  const body = encodeURIComponent(`${f.get('message')}\n\nFrom: ${f.get('name')} (${f.get('email')})`);
-  window.location.href = `mailto:you@example.com?subject=Portfolio%20message&body=${body}`;
-  document.getElementById('status').textContent = 'Opening your email app…';
+  const status = document.getElementById('status');
+  const submitBtn = form.querySelector('button[type="submit"]');
+  status.className = '';
+
+  const results = Object.keys(rules).map(check);
+  if (results.includes(false)) {
+    status.textContent = 'Please fix the highlighted fields.';
+    form.querySelector('.invalid').focus();
+    return;
+  }
+
+  const data = Object.fromEntries(new FormData(form));
+  data.access_key = 'b1871495-8676-4cd3-82ba-8b1da87f590f';
+  data.subject = 'New message from ' + data.name + ' (D-Folio)';
+  data.from_name = 'D-Folio Website';
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending…';
+  status.textContent = '';
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const json = await res.json();
+    if (json.success) {
+      status.className = 'ok';
+      status.textContent = 'Your message has been sent successfully. Adam will get back to you as soon as possible!';
+      form.reset();
+    } else {
+      throw new Error(json.message || 'Send failed');
+    }
+  } catch (err) {
+    status.textContent = 'Sorry, something went wrong. Please email Adam directly instead.';
+    console.error(err);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Submit';
+  }
+});
+
+// Photo stack: hover or tap the back photo to bring it to the front
+const stack = document.getElementById('photo-stack');
+let swapLock = false;
+
+function isBack(pic) {
+  return pic.classList.contains(stack.dataset.front === 'a' ? 'b' : 'a');
+}
+function swapPhotos() {
+  if (swapLock) return;
+  swapLock = true;
+  stack.dataset.front = stack.dataset.front === 'a' ? 'b' : 'a';
+  setTimeout(() => swapLock = false, 700);
+}
+stack.querySelectorAll('.pic').forEach(pic => {
+  pic.addEventListener('mouseenter', () => { if (isBack(pic)) swapPhotos(); });
+  pic.addEventListener('click', () => { if (isBack(pic)) swapPhotos(); });
 });
 </script>
 </body>
