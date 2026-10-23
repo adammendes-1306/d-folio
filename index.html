@@ -152,6 +152,23 @@ button.btn{background:transparent;color:inherit;font:inherit;cursor:pointer}
 .modal ul{padding-left:20px;display:grid;gap:6px}
 body:has(dialog[open]){overflow:hidden}
 
+/* Project gallery */
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin-top:8px}
+.gallery figure{margin:0}
+.gallery img{
+  width:100%;aspect-ratio:9/16;object-fit:cover;display:block;
+  border-radius:12px;border:1px solid var(--line);background:var(--bg);
+  cursor:zoom-in;transition:transform .2s ease, box-shadow .2s ease;
+}
+.gallery img:hover{transform:scale(1.03);box-shadow:0 8px 20px rgba(20,33,61,.15)}
+.gallery figcaption{font-size:.8rem;color:var(--muted);text-align:center;margin-top:6px}
+
+/* Lightbox */
+.lightbox{background:transparent;border:0;padding:0;max-width:94vw;max-height:94vh;margin:auto;overflow:visible}
+.lightbox::backdrop{background:rgba(20,33,61,.85)}
+.lightbox img{display:block;max-width:94vw;max-height:90vh;border-radius:12px;cursor:zoom-out}
+@media (prefers-reduced-motion:reduce){.gallery img{transition:none}.gallery img:hover{transform:none}}
+
 /* Timeline */
 .timeline{position:relative;list-style:none;padding-left:34px;max-width:760px;margin:0 auto}
 .timeline::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--line)}
@@ -591,13 +608,13 @@ input.invalid,textarea.invalid{border-color:#FF9E9E}
     </div>
 
     <div class="modal-links">
-      <a class="btn primary small" href="resume/Adam_Rais_Resume.pdf" download>Download PDF</a>
+      <a class="btn primary small" href="resume/Adam_Rais_Resume_Oct2026.pdf" download>Download PDF</a>
       <button type="button" class="btn small" id="resume-print">Print PDF</button>
     </div>
 
     <iframe id="resume-frame" class="resume-frame" title="Resume preview"></iframe>
     <p class="resume-fallback">Can't see the preview?
-      <a href="resume/Adam_Rais_Resume.pdf" target="_blank" rel="noopener">Open the PDF in a new tab</a>.
+      <a href="resume/Adam_Rais_Resume_Oct2026.pdf" target="_blank" rel="noopener">Open the PDF in a new tab</a>.
     </p>
   </div>
 </dialog>
@@ -653,6 +670,39 @@ input.invalid,textarea.invalid{border-color:#FF9E9E}
       <li>What you learned</li>
           <p style="text-align: justify;">Utilized modern web technologies to create a responsive and user-friendly interface.</p>
     </ul>
+
+    <h4>Screenshots</h4>
+      <div class="gallery">
+        <figure>
+          <img src="projects/mypocket/calender_section.jpg" alt="MYPOCKET calendar section" loading="lazy" onerror="this.closest('figure').remove()">
+          <figcaption>Calendar Section</figcaption>
+        </figure>
+  
+        <figure>
+          <img src="projects/mypocket/event_details.jpg" alt="MYPOCKET planner details" loading="lazy" onerror="this.closest('figure').remove()">
+          <figcaption>Planner details</figcaption>
+        </figure>
+
+        <figure>
+          <img src="projects/mypocket/wallet_section.jpg" alt="MYPOCKET wallet section" loading="lazy" onerror="this.closest('figure').remove()">
+          <figcaption>Wallet Section</figcaption>
+        </figure>
+
+        <figure>
+          <img src="projects/mypocket/expense_input.jpg" alt="MYPOCKET income and expense input" loading="lazy" onerror="this.closest('figure').remove()">
+          <figcaption>Income & Expense Input</figcaption>
+        </figure>
+
+        <figure>
+          <img src="projects/mypocket/wallet_weekly_summary.jpg" alt="MYPOCKET weekly summary" loading="lazy" onerror="this.closest('figure').remove()">
+          <figcaption>Weekly Summary</figcaption>
+        </figure>
+
+        <figure>
+          <img src="projects/mypocket/account_balances.jpg" alt="MYPOCKET account balances" loading="lazy" onerror="this.closest('figure').remove()">
+          <figcaption>Account Balances</figcaption>
+        </figure>
+      </div>
   </div>
 </dialog>
 
@@ -664,8 +714,8 @@ input.invalid,textarea.invalid{border-color:#FF9E9E}
     </div>
 
     <div class="modal-links">
-      <a class="btn primary small" href="https://drive.google.com/file/d/1sWs66JF23KKQ684uGd8sjTegRuYi2unG/view?usp=sharing" target="_blank" rel="noopener">Website Demo Link</a>
-      <a class="btn small" href="https://github.com/adammendes-1306/mypocket.git" target="_blank" rel="noopener">Source code</a>
+      <a class="btn primary small" href="https://adammendes-1306.github.io/e-portal/" target="_blank" rel="noopener">Website Demo Link</a>
+      <a class="btn small" href="https://github.com/adammendes-1306/e-portal.git" target="_blank" rel="noopener">Source code</a>
     </div>
 
     <h4>Project description</h4>
@@ -722,7 +772,7 @@ btn.addEventListener('click', () => {
 menu.addEventListener('click', e => { if (e.target.tagName === 'A') menu.classList.remove('open'); });
 
 // Resume pop-up
-const RESUME_URL = 'resume/Adam_Rais_Resume.pdf';
+const RESUME_URL = 'resume/Adam_Rais_Resume_OCT2026.pdf';
 const resumeFrame = document.getElementById('resume-frame');
 
 document.getElementById('resume-open').addEventListener('click', () => {
