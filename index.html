@@ -74,7 +74,7 @@ dialog.resume-modal{width:min(900px,96vw);max-height:88vh} /* A selector with an
 #home{padding:72px 0 96px}
 .hero{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:center}
 .hero h1{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800}
-.hero .role{font-family:var(--head);font-weight:500;font-size:1.3rem;color:var(--accent);margin:18px 0 14px}
+.hero .role{font-family:var(--head);font-weight:500;font-size:1.1rem;color:var(--accent);margin:18px 0 14px}
 .hero p.desc1 .hero p.desc2{color:var(--muted);max-width:46ch}
 .hero p.desc1{font-weight:500;margin-bottom:12px}
 .hero p.desc2{margin-bottom:32px;text-align:justify}
@@ -190,6 +190,20 @@ body:has(dialog[open]){overflow:hidden}
   .t-card{transition:none}
   .t-card:hover{transform:none}
 }
+
+/* Clickable timeline cards */
+.t-card[data-open]{cursor:pointer;position:relative}
+.t-card[data-open]::after{
+  content:"Click for details →";display:block;margin-top:16px;
+  font-size:.85rem;font-weight:500;color:var(--accent);
+}
+.t-card[data-open]:hover{transform:scale(1.02);box-shadow:0 12px 28px rgba(20,33,61,.12)}
+
+/* Landscape pictures for timeline pop-ups */
+.gallery.wide{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.gallery.wide img{aspect-ratio:4/3}
+.modal .org{color:var(--muted);margin-bottom:8px}
+.modal time{display:inline-block;background:var(--bg);color:var(--accent);font-weight:500;font-size:.85rem;padding:3px 14px;border-radius:999px;margin-bottom:12px}
 
 /* Skills */
 .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
@@ -318,10 +332,10 @@ input.invalid,textarea.invalid{border-color:#FF9E9E}
   <div class="wrap hero">
     <div>
       <h1>Hi, I’m Adam Rais.</h1>
-      <p class="role">Quality Assurance Intern</p>
-      <p class="desc1">A Diploma in Computer Science student at UPTM.</p>
+      <p class="role">Quality Assurance | Software Developer | Automation Tester</p>
       <p class="desc2">Experienced in software testing and web and mobile application development, 
-        with a passion for learning and professional growth in IT.
+        with a strong interest in automation concepts and skills, continuous learning, and professional growth
+        in the IT industry.
       </p>
       <div class="btns">
         <a class="btn primary" href="#projects">View my work</a>
@@ -347,14 +361,14 @@ input.invalid,textarea.invalid{border-color:#FF9E9E}
     <h2>About me</h2>
     <div class="about">
       <div>
-        <p>I am a <b>Diploma in Computer Science student</b> with a background in software development and a growing interest in software quality assurance. 
-          Currently, I am undertaking <b>a 14-week internship at Entomo Digital Sdn. Bhd. as a Quality Assurance Intern</b>, 
-          where I gain hands-on experience in software testing within an Agile environment, writing test cases, and contributing to a government healthcare platform.
+        <p>My technical experience includes developing web and mobile applications through academic and personal projects, 
+          using technologies such as Java, Python, HTML, and CSS. I also have experience in software testing, including manual 
+          testing and writing test scripts to verify application functionality and quality. Currently, I am exploring technologies 
+          and frameworks, such as CSS & JavaScript frameworks, to broaden my development knowledge.
         </p>
 
-        <p>My technical experience includes Java, Python, HTML, and CSS. I am also exploring technologies and frameworks such as Tailwind CSS and Node.js 
-          to broaden my development knowledge. Driven by curiosity and a passion for continuous learning, I enjoy exploring new technologies, 
-          strengthening my technical abilities, and discovering the ever-evolving world of IT.
+        <p>With a strong curiosity about technology, I am particularly interested in test automation and understanding how automated 
+          testing works. I enjoy exploring new tools, strengthening my technical abilities, and continuously learning about the evolving IT industry.
         </p>
       </div>
       <ul class="facts">
@@ -418,44 +432,44 @@ input.invalid,textarea.invalid{border-color:#FF9E9E}
     <h2>Timeline</h2>
     <ol class="timeline">
 
-      <li>
-        <article class="t-card">
-          <time>2026 – Present</time>
-          <h3>Quality Assurance Intern</h3>
-          <div class="org">Entomo Digital Sdn. Bhd.</div>
-          <p>Performed software testing in an Agile environment, prepared and executed test cases,
-            and verified application functionality to identify defects and ensure software quality.
-            Contributed to testing a government healthcare platform and collaborated with the team
-            to support reliable application performance.</p>
-        </article>
-      </li>
+  <li>
+    <article class="t-card" data-open="timeline1" tabindex="0" role="button" aria-label="View details: Quality Assurance Intern">
+      <time>2026 – Present</time>
+      <h3>Quality Assurance Intern</h3>
+      <div class="org">Entomo Digital Sdn. Bhd.</div>
+      <p>Performed software testing in an Agile environment, prepared and executed test cases,
+        and verified application functionality to identify defects and ensure software quality.
+        Contributed to testing a government healthcare platform and collaborated with the team
+        to support reliable application performance.</p>
+    </article>
+  </li>
 
-      <li>
-        <article class="t-card">
-          <time>2024 – 2026</time>
-          <h3>Diploma in Computer Science</h3>
-          <div class="org">Universiti Poly-Tech Malaysia (UPTM)</div>
+  <li>
+    <article class="t-card" data-open="timeline2" tabindex="0" role="button" aria-label="View details: Diploma in Computer Science">
+      <time>2024 – 2026</time>
+      <h3>Diploma in Computer Science</h3>
+      <div class="org">Universiti Poly-Tech Malaysia (UPTM)</div>
 
-          <h4>Field of study</h4>
-          <p>Computer Science, with academic exposure to software development, database management,
-            computer networking, and cybersecurity.</p>
+      <h4>Field of study</h4>
+      <p>Computer Science, with academic exposure to software development, database management,
+        computer networking, and cybersecurity.</p>
 
-          <h4>Honours &amp; achievements</h4>
-          <ul>
-            <li>Received the Senate Award in the first semester.</li>
-            <li>Achieved the Dean's List Award every semester.</li>
-          </ul>
+      <h4>Honours &amp; achievements</h4>
+      <ul>
+        <li>Received the Senate Award in the first semester.</li>
+        <li>Achieved the Dean's List Award every semester.</li>
+      </ul>
 
-          <h4>Relevant projects</h4>
-          <ul>
-            <li><b>MYPOCKET (Final Year Project):</b> A mobile application for task management and personal finance assistance.</li>
-            <li><b>MyTech (Web Application Development):</b> Developed a web application as part of the Web Application Development subject.</li>
-            <li><b>Cloud Computing:</b> Completed an academic project involving cloud computing concepts and technologies.</li>
-          </ul>
-        </article>
-      </li>
+      <h4>Relevant projects</h4>
+      <ul>
+        <li><b>MYPOCKET (Final Year Project):</b> A mobile application for task management and personal finance assistance.</li>
+        <li><b>MyTech (Web Application Development):</b> Developed a web application as part of the Web Application Development subject.</li>
+        <li><b>Cloud Computing:</b> Completed an academic project involving cloud computing concepts and technologies.</li>
+      </ul>
+    </article>
+  </li>
 
-    </ol>
+</ol>
   </div>
 </section>
 
@@ -667,7 +681,7 @@ input.invalid,textarea.invalid{border-color:#FF9E9E}
             understanding of their financial patterns over time. To further enhance this awareness, a
             visualization summary was implemented using a pie chart, allowing users to interpret their financial
             data intuitively than through text alone</p>
-      <li>What you learned</li>
+      <li>What I learned</li>
           <p style="text-align: justify;">Utilized modern web technologies to create a responsive and user-friendly interface.</p>
     </ul>
 
@@ -760,6 +774,100 @@ input.invalid,textarea.invalid{border-color:#FF9E9E}
   </div>
 </dialog>
 
+<!-- Timeline details: QA Intern -->
+<dialog id="timeline1" class="modal" aria-labelledby="timeline1-title">
+  <div class="modal-inner">
+    <div class="modal-head">
+      <h3 id="timeline1-title">Quality Assurance Intern</h3>
+      <button class="close" data-close aria-label="Close">×</button>
+    </div>
+
+    <time>2026 – Present</time>
+    <div class="org">Entomo Digital Sdn. Bhd.</div>
+
+    <h4>Overview</h4>
+    <p style="text-align: justify;">Performed software testing in an Agile environment, prepared and executed
+      test cases, and verified application functionality to identify defects and ensure software quality.</p>
+
+    <h4>Responsibilities</h4>
+    <ul>
+      <li>Prepared and executed test cases</li>
+      <li>Reported and tracked defects</li>
+      <li>Contributed to testing a government healthcare platform</li>
+      <li>Collaborated with the team in Agile sprints</li>
+    </ul>
+
+    <h4>What I learned</h4>
+    <p style="text-align: justify;">.</p>
+
+    <h4>Pictures</h4>
+    <div class="gallery wide">
+      <figure>
+        <img src="images/timeline/qa_team1.jpeg" alt="Internship photo 1" loading="lazy" onerror="this.closest('figure').remove()">
+        <figcaption>QA Team with Qurratul, Syazreen and Sanjini.</figcaption>
+      </figure>
+      <figure>
+        <img src="images/timeline/qa_team2.jpeg" alt="Internship photo 2" loading="lazy" onerror="this.closest('figure').remove()">
+        <figcaption>Movie Day with QA Team</figcaption>
+      </figure>
+      <figure>
+        <img src="images/timeline/qa_team3.jpeg" alt="Internship photo 3" loading="lazy" onerror="this.closest('figure').remove()">
+        <figcaption>Farewell Gathering</figcaption>
+      </figure>
+      <figure>
+        <img src="images/timeline/qa_team4.jpg" alt="Internship photo 4" loading="lazy" onerror="this.closest('figure').remove()">
+        <figcaption>Malaysia Day Celebration</figcaption>
+      </figure>
+    </div>
+  </div>
+</dialog>
+
+<!-- Timeline details: Diploma -->
+<dialog id="timeline2" class="modal" aria-labelledby="timeline2-title">
+  <div class="modal-inner">
+    <div class="modal-head">
+      <h3 id="timeline2-title">Diploma in Computer Science</h3>
+      <button class="close" data-close aria-label="Close">×</button>
+    </div>
+
+    <time>2024 – 2026</time>
+    <div class="org">Universiti Poly-Tech Malaysia (UPTM)</div>
+
+    <h4>Field of study</h4>
+    <p style="text-align: justify;">Computer Science, with academic exposure to software development,
+      database management, computer networking, and cybersecurity.</p>
+
+    <h4>Honours &amp; achievements</h4>
+    <ul>
+      <li>Received the Senate Award in the first semester.</li>
+      <li>Achieved the Dean's List Award every semester.</li>
+      <li>Graduated with a CGPA of 3.90.</li>
+    </ul>
+
+    <h4>Relevant projects</h4>
+    <ul>
+      <li><b>MYPOCKET (Final Year Project):</b> A mobile application for task management and personal finance assistance.</li>
+      <li><b>MyTech:</b> A web application built for the Web Application Development subject.</li>
+      <li><b>Cloud Computing:</b> An academic project on cloud computing concepts and technologies.</li>
+    </ul>
+
+    <h4>Pictures</h4>
+    <div class="gallery wide">
+      <figure>
+        <img src="images/timeline/uptm-1.jpg" alt="Senate Award" loading="lazy" onerror="this.closest('figure').remove()">
+        <figcaption>Senate Award</figcaption>
+      </figure>
+      <figure>
+        <img src="images/timeline/uptm-2.jpg" alt="Dean's List certificate" loading="lazy" onerror="this.closest('figure').remove()">
+        <figcaption>Dean's List</figcaption>
+      </figure>
+    </div>
+  </div>
+</dialog>
+
+<!-- Picture viewer (zoom) -->
+<dialog id="lightbox" class="lightbox"><img id="lightbox-img" alt=""></dialog>
+
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
 
@@ -798,6 +906,25 @@ document.querySelectorAll('dialog').forEach(dlg => {
     if (e.target === dlg || e.target.hasAttribute('data-close')) dlg.close();
   });
 });
+
+// Timeline cards: open with keyboard (Enter / Space) too
+document.querySelectorAll('.t-card[data-open]').forEach(card => {
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+  });
+});
+
+// Click any gallery picture to zoom
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+document.querySelectorAll('.gallery img').forEach(img => {
+  img.addEventListener('click', () => {
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightbox.showModal();
+  });
+});
+lightbox.addEventListener('click', () => lightbox.close());
 
 // Contact form validation
 const form = document.getElementById('contact-form');
